@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issues Tracker || Sign in</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Tailwind and daisy ui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <section class="min-h-screen max-w-md bg-base-200 mx-auto space-x-6">
+        <fieldset
+            class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-8 space-x-6 min-h-screen max-w-md bg-base-200 mx-auto my-20">
+            <div class="mx-auto text-center">
+                <img src="./assets/github-logo.png" alt="GitHub Logo image" class="mx-auto">
+                <h3 class="font-bold text-xl">GitHub Issues Tracker</h3>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
+            </div>
+
+            <label class="label">Username</label>
+            <input id="user-name" type="email" class="input" placeholder="Enter Username" />
+            <p class="text-[#4A00FF] mb-4">Default: admin </p>
+
+            <label class="label">Password</label>
+            <input id="password" type="password" class="input" placeholder="Enter Password" />
+            <p class="text-[#4A00FF] mb-4">Default: admin123 </p>
+
+            <button id="sign-in" class="btn btn-primary">Sign in</button>
+            <div class="divider">OR</div>
+            <p class="text-[#64748B] text-center mx-auto">Demo Credentials:</p>
+            <div class="p-6 text-center">
+                <p> <span class="font-bold">Username:</span> admin</p>
+                <p> <span class="font-bold">Password:</span> admin123</p>
+
+            </div>
+        </fieldset>
+    </section>
+
+
+    <script src="./script/index.js"></script>
+    <script src="./script/all-issues.js"></script>
+</body>
+
+</html>
