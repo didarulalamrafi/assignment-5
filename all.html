@@ -51,9 +51,9 @@
 
         <section class="mx-auto w-11/12 mb-5">
             <div class="mx-auto shadow-md p-6 space-x-2">
-                <button class="btn btn-primary px-8 py-3">All</button>
-                <button class="btn px-8 py-3">Open</button>
-                <button class="btn px-8 py-3">Close</button>
+                <button id="all-btn" class="btn btn-primary px-8 py-3">All</button>
+                <button id="open-btn" class="btn px-8 py-3">Open</button>
+                <button id="close-btn" class="btn px-8 py-3">Close</button>
             </div>
         </section>
 
@@ -76,7 +76,7 @@
 
                     <div class="flex items-center justify-center ">
                         <span class="w-[12px] h-[12px] bg-purple-600 rounded-full flex items-center "> </span> 
-                        <p class="font-semibold mx-1 text-center">Open</p>
+                        <p class="font-semibold mx-1 text-center">Close</p>
                     </div>
                     
                     <!-- <span>Close</span> -->
@@ -84,7 +84,7 @@
             </div>
         </section>
 
-        <section id="all-issues-card" class="mx-auto w-11/12 shadow-md p-6 grid md:grid-cols-3 grid-cols-1 gap-3 ">
+        <section id="all-issues-card" class="mx-auto w-11/12 shadow-md p-6 grid md:grid-cols-4 grid-cols-1 gap-3">
 
             <!-- <div class="card shadow-lg gap-5">
                 <div class="top-part p-4">
