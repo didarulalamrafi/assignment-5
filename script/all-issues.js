@@ -40,8 +40,8 @@ const displayAllIssues = (issues) => {
                         </div>
                     </div>
                     <div class="divider my-0"></div>
-                    <div class="p-4 mt-0">
-                        <p class="text-[#64748B]" >${issues.author}</p>
+                    <div class="p-4 mt-0 space-y-2">
+                        <p class="text-[#64748B]">${issues.author}</p>
                         <p class="text-[#64748B]">${issues.createdAt}</p>
                     </div>
                 </div>`;
