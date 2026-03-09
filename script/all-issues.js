@@ -15,18 +15,19 @@ allIssuesbtn.addEventListener("click", () => {
   };
 
   const displayAllIssues = (issues) => {
+    // allIssuesCard.innerHTML = " ";
+    const totalIssues = document.getElementById("total-issues");
+    const allIssuesCardcreate = document.createElement("div");
     issues.forEach((issues) => {
       // console.log(issues)
-      const totalIssues = document.getElementById("total-issues");
       totalIssues.innerText = issues.id;
-      const allIssuesCardcreate = document.createElement("div");
       const borderTop =
         issues.status === "open"
           ? "border-t-4 border-green-600"
           : "border-t-4 border-[#A855F7]";
 
       allIssuesCardcreate.innerHTML = `
-                <div id="card" class ="card shadow-lg h-[100%] w-[100%] ">
+                <div onclick="issueDetail(${issues.id})" id="card" class ="card shadow-lg h-[100%] w-[100%] ">
                     <div class="top-part p-4 rounded-md ${borderTop}">
                     <div class="top flex justify-between items-center">
                     
@@ -36,7 +37,7 @@ allIssuesbtn.addEventListener("click", () => {
                     </div>
                         <h4 class="font-semibold text-md">${issues.title}</h4>
                         <p class="text-[#64748B]">${issues.description}</p>
-                        <div class="mt-3">
+                        <div class="mt-3 flex justify-start items-center gap-2 md:flex-wrap">
                             <button class="flex items-center justify-center btn btn-soft bg-red-100 btn-error rounded-full text-red-500 "> <i class="fa-solid fa-bug"></i> ${issues.labels[0]} </button>
                             <button class="flex items-center text-center justify-center btn btn-soft bg-yellow-100 btn-warning rounded-full text-yellow-500"><i class="fa-solid fa-circle-radiation"></i> ${issues.labels[1]} </button>
                         </div>
@@ -69,11 +70,11 @@ closeIssues.addEventListener("click", () => {
   };
 
   const displayOpenIssues = (status) => {
-    // openIssuesCardcreate.innerHTML = "";
+    const totalIssues = document.getElementById("total-issues");
+    allIssuesCard.innerHTML = "";
     status.forEach((st) => {
       if (st.status === "open") {
         // console.log(status);
-        const totalIssues = document.getElementById("total-issues");
 
         const openCount = status.filter((iss) => iss.status === "open").length;
         totalIssues.innerText = openCount;
@@ -85,7 +86,7 @@ closeIssues.addEventListener("click", () => {
             : "border-t-4 border-purple-600";
         // openIssuesCardcreate.innerHTML = " ";
         openIssuesCardcreate.innerHTML = `
-                <div id="card" class ="card shadow-lg h-[100%] w-[100%] ">
+                <div onclick="issueDetail(${st.id})" id="card" class ="card shadow-lg h-[100%] w-[100%] ">
                     <div class="top-part p-4 rounded-md ${borderTop}">
                     <div class="top flex justify-between items-center ">
                     
@@ -130,11 +131,11 @@ closeIssuebtn.addEventListener("click", () => {
   };
 
   const displayCloseIssues = (status) => {
-    // closeIssuesCardcreate.innerHTML = "";
+    allIssuesCard.innerHTML = " ";
     status.forEach((st) => {
       if (st.status === "closed") {
-        // console.log(status);
         const totalIssues = document.getElementById("total-issues");
+        // console.log(status);
 
         const closeCount = status.filter(
           (iss) => iss.status === "closed",
@@ -146,9 +147,8 @@ closeIssuebtn.addEventListener("click", () => {
           st.status === "closed"
             ? "border-t-4 border-purple-600"
             : "border-t-4 border-red-600";
-        closeIssuesCardcreate.innerHTML = " ";
         closeIssuesCardcreate.innerHTML = `
-                <div id="card" class ="card shadow-lg h-[100%] w-[100%] ">
+                <div onclick="issueDetail(${st.id})" id="card" class ="card shadow-lg h-[100%] w-[100%] ">
                     <div class="top-part p-4 rounded-md ${borderTop}">
                     <div class="top flex justify-between items-center ">
                     
@@ -170,10 +170,74 @@ closeIssuebtn.addEventListener("click", () => {
                     </div>
                 </div>`;
         allIssuesCard.append(closeIssuesCardcreate);
-        return;
       }
       // console.log(st);
     });
   };
   closeIssues();
 });
+
+// Modal=====================================================
+
+const issueDetail = (id) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((issues) => {
+      displayDeatil(issues);
+    });
+};
+
+// {
+//   "status": "success",
+//   "message": "Issue fetched successfully",
+//   "data": {
+//     "id": 33,
+//     "title": "Add bulk operations support",
+//     "description": "Allow users to perform bulk actions like delete, update status on multiple items at once.",
+//     "status": "open",
+//     "labels": [
+//       "enhancement"
+//     ],
+//     "priority": "low",
+//     "author": "bulk_barry",
+//     "assignee": "",
+//     "createdAt": "2024-02-02T10:00:00Z",
+//     "updatedAt": "2024-02-02T10:00:00Z"
+//   }
+// }
+
+const modalCard = document.getElementById("issue_modal");
+const displayDeatil = (issue) => {
+  const modalInfo = document.getElementById("modal_info");
+  modalInfo.innerHTML = ` <div id="modal_info class= "space-y-5">
+                        <h3 class="font-bold text-xl">${issue.data.title}</h3>
+                        <button class="btn px-4 py-2 rounded-full bg-[#00A96E]"> ${issue.data.status}</button>
+                        <span> Opened by ${issue.data.author}</span>
+                        <span>${issue.data.createdAt}</span>
+                        <div class="mt-3 space-y-5">
+                            <div class="flex items-center justify-start gap-2">
+                            <button
+                                class="flex items-center justify-center btn btn-soft bg-red-100 btn-error rounded-full text-red-500 ">
+                                <i class="fa-solid fa-bug"></i> ${issue.data.labels[0] || " "} </button>
+                            <button
+                                class="flex items-center text-center justify-center btn btn-soft bg-yellow-100 btn-warning rounded-full text-yellow-500"><i
+                                    class="fa-solid fa-circle-radiation"></i> ${issue.data.labels[1]} </button>
+                                    </div>
+                      </div class="space-y-5">
+                        <p>${issue.data.description}</p>
+                        <div class="flex justify-start items-center">
+                        <div class="flex-1">
+                            <p> Assignee: </p>
+                            <h3>${issue.data.author}</h3>
+                        </div>
+                        <div class="flex-1">
+                            <p>Priority: </p>
+                            <button class="btn bg-[#EF4444] rounded-full text-white">${issue.data.priority}</button>
+                        </div>
+                    </div>
+                    </div>
+  `;
+  document.getElementById("issue_modal").showModal();
+  console.log(issue);
+};
