@@ -15,9 +15,7 @@ allIssuesbtn.addEventListener("click", () => {
   };
 
   const displayAllIssues = (issues) => {
-    // allIssuesCard.innerHTML = " ";
-    const totalIssues = document.getElementById("total-issues");
-    const allIssuesCardcreate = document.createElement("div");
+    allIssuesCard.innerHTML = " ";
     issues.forEach((issues) => {
       // console.log(issues)
       totalIssues.innerText = issues.id;
@@ -26,6 +24,8 @@ allIssuesbtn.addEventListener("click", () => {
           ? "border-t-4 border-green-600"
           : "border-t-4 border-[#A855F7]";
 
+      const allIssuesCardcreate = document.createElement("div");
+      const totalIssues = document.getElementById("total-issues");
       allIssuesCardcreate.innerHTML = `
                 <div onclick="issueDetail(${issues.id})" id="card" class ="card shadow-lg h-[100%] w-[100%] ">
                     <div class="top-part p-4 rounded-md ${borderTop}">
