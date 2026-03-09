@@ -4,29 +4,28 @@
 
 const allIssuesCard = document.getElementById("all-issues-card");
 const allIssuesbtn = document.getElementById("all-btn");
-allIssuesbtn.addEventListener("click", () => {
-  const allIssues = () => {
-    const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
-    fetch(url)
-      .then((res) => res.json())
-      .then((issues) => {
-        displayAllIssues(issues.data);
-      });
-  };
+const allIssues = () => {
+  const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+  fetch(url)
+    .then((res) => res.json())
+    .then((issues) => {
+      displayAllIssues(issues.data);
+    });
+};
 
-  const displayAllIssues = (issues) => {
-    allIssuesCard.innerHTML = " ";
-    issues.forEach((issues) => {
-      // console.log(issues)
-      const totalIssues = document.getElementById("total-issues");
-      totalIssues.innerText = issues.id;
-      const borderTop =
-        issues.status === "open"
-          ? "border-t-4 border-green-600"
-          : "border-t-4 border-[#A855F7]";
+const displayAllIssues = (issues) => {
+  allIssuesCard.innerHTML = " ";
+  issues.forEach((issues) => {
+    // console.log(issues)
+    const totalIssues = document.getElementById("total-issues");
+    totalIssues.innerText = issues.id;
+    const borderTop =
+      issues.status === "open"
+        ? "border-t-4 border-green-600"
+        : "border-t-4 border-[#A855F7]";
 
-      const allIssuesCardcreate = document.createElement("div");
-      allIssuesCardcreate.innerHTML = `
+    const allIssuesCardcreate = document.createElement("div");
+    allIssuesCardcreate.innerHTML = `
                 <div onclick="issueDetail(${issues.id})" id="card" class ="card shadow-lg h-[100%] w-[100%] ">
                     <div class="top-part p-4 rounded-md ${borderTop}">
                     <div class="top flex justify-between items-center">
@@ -48,11 +47,10 @@ allIssuesbtn.addEventListener("click", () => {
                         <p class="text-[#64748B]">${issues.createdAt}</p>
                     </div>
                 </div>`;
-      allIssuesCard.append(allIssuesCardcreate);
-    });
-  };
-  allIssues();
-});
+    allIssuesCard.append(allIssuesCardcreate);
+  });
+};
+allIssues();
 
 // All button end **************************
 
