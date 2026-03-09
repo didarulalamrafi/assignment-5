@@ -1,7 +1,7 @@
 // for login page
 
 // console.log(allIssuesCard)
-
+// allIssues();
 const allIssuesCard = document.getElementById("all-issues-card");
 const allIssuesbtn = document.getElementById("all-btn");
 const allIssues = () => {
@@ -51,6 +51,10 @@ const displayAllIssues = (issues) => {
   });
 };
 allIssues();
+const allIssuesButton = document.getElementById("all-btn");
+allIssuesButton.addEventListener("click", () => {
+  allIssues();
+});
 
 // All button end **************************
 
@@ -239,3 +243,35 @@ const displayDeatil = (issue) => {
   document.getElementById("issue_modal").showModal();
   console.log(issue);
 };
+
+// Button Active
+
+// const btnActive = () => {
+//   closeIssuebtn.classList.add("btn-primary");
+// };
+
+const buttons = document.querySelectorAll(".count-btn");
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    buttons.forEach((b) => {
+      b.classList.remove("btn-primary");
+    });
+    btn.classList.add("btn-primary");
+  });
+});
+
+const btnSearch = document.getElementById("btn-search");
+btnSearch.addEventListener("click", () => {
+  const input = document.getElementById("input-search");
+  const inputSearch = input.value.trim().toLowerCase();
+  console.log(inputSearch);
+
+  fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputSearch}`,
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
+});
